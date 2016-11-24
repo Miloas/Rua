@@ -1,0 +1,10 @@
+.content_center {
+    padding-top: 10px;
+    padding-left: 6px;
+    padding-right: 16px;
+    height: 426px;
+    overflow: scroll;
+}
+.content_center::-webkit-scrollbar{
+    display: none;
+}

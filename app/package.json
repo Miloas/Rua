@@ -1,0 +1,21 @@
+{
+  "name": "Rua",
+  "productName": "Rua",
+  "version": "0.0.1",
+  "description": "downloader",
+  "main": "./main.js",
+  "author": {
+    "name": "Miloas",
+    "email": "genesis.null@gmail.com",
+    "url": "https://github.com/miloas"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "JSONRpc": "^0.3.9",
+    "conf2p": "^0.1.2",
+    "font-awesome": "^4.7.0",
+    "react": "^15.4.0",
+    "react-dom": "^15.4.0",
+    "semantic-ui-react": "^0.58.3"
+  }
+}

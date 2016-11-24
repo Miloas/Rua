@@ -1,0 +1,17 @@
+/*
+    bottom-fixed
+*/
+.bottom_fixed {
+    position: fixed;
+    left: 0;
+    bottom: 26px;
+    width: 100%;
+    height: 72px;
+    border-style: solid;
+    border-width: 1px 0px;
+    border-color: #D8D8D8	
+}
+
+.bottom_vertical {
+  padding-top: 20px;
+}
