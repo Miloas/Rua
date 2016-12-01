@@ -65,7 +65,7 @@ app.on('window-all-closed', () => {
 });
 
 
-const installExtensions = async() => {
+const installExtensions = async () => {
   if (process.env.NODE_ENV === 'development') {
     const installer = require('electron-devtools-installer'); // eslint-disable-line global-require
 
@@ -82,7 +82,7 @@ const installExtensions = async() => {
   }
 };
 
-app.on('ready', async() => {
+app.on('ready', async () => {
   await installExtensions();
 
   mainWindow = new BrowserWindow({
@@ -90,7 +90,7 @@ app.on('ready', async() => {
     width: 360,
     minHeight: 572,
     resizable: false
-  });
+  })
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
 

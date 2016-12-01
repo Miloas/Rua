@@ -90,7 +90,7 @@ export default class DownloadItem extends Component {
   client = new JSONRpcClient("localhost", 6800, "/jsonrpc")
   render() {
     return (
-      <List.Item onDoubleClick={this.handleDoubleClick}>
+      <List.Item onDoubleClick={this.handleDoubleClick} className={styles.bg_color}>
         <List.Content floated="right" className={styles.padding_top}>
           {(() => {
             if (this.state.status === 'complete')

@@ -6,21 +6,37 @@ import JSONRpcClient from "JSONRpc";
 // import { Link } from "react-router";
 import styles from "./BottomMenu.css";
 
+
 export default class BottomMenu extends Component {
-  state = { open: false, uri: "", torrentFile: null }
+  state = { open: false, uri: "", torrentFilePath: undefined }
   client = new JSONRpcClient("localhost", 6800, "/jsonrpc")
   show = () => this.setState({ open: true })
   close = () => this.setState({ open: false })
   handleURIInputChange = (e:any) => this.setState({ uri: e.target.value })
+  handleUpload = (e: any) => {
+    const file = e.target.files[0]
+    const fileExtension = file.name.split(".").pop()
+    console.log(fileExtension)
+    const reader = new FileReader()
+    reader.onload = (upload) => {
+      const base64Data = btoa(upload.target.result)
+      console.log(base64Data)
+    }
+    reader.readAsText(file)
+  }
   handleSubmit = () => {
-    this.client.call("aria2.addUri", [[this.state.uri]], (err, ret) => {
-      if (err) console.log(err)
-      else {
-        console.log(ret)
-        this.props.addItem(ret)
-        this.setState({ open: false })
-      }
-    })
+    if (this.state.torrentFilePath === undefined) {
+      this.client.call("aria2.addUri", [[this.state.uri]], (err, ret) => {
+        if (err) console.log(err)
+        else {
+          console.log(ret)
+          this.props.addItem(ret)
+          this.setState({ open: false })
+        }
+      })
+    } else {
+      console.log(this.state.torrentFilePath)
+    }
   }
   handleActiveAll = () => {
     this.props.activeAll()
@@ -45,7 +61,7 @@ export default class BottomMenu extends Component {
             <Grid.Row>
               <Grid.Column width={1} />
               <Grid.Column width={14} >
-                <Grid columns={3}>
+                {/*<Grid columns={3}>
                   <Grid.Row>
                     <Grid.Column>
                       <Button size="mini" onClick={this.show}><Icon name="plus" />New</Button>
@@ -57,7 +73,8 @@ export default class BottomMenu extends Component {
                       <Button size="mini" onClick={this.handlePauseAll}><Icon name="pause" />Pause</Button>
                     </Grid.Column>
                   </Grid.Row>
-                </Grid>
+                </Grid>*/}
+                <Button fluid color="teal" onClick={this.show}><Icon name="magnet" />添加下载链接</Button>
               </Grid.Column>
               <Grid.Column width={1} />
             </Grid.Row>
@@ -66,8 +83,8 @@ export default class BottomMenu extends Component {
             <Modal.Content>
               <Form>
                 <Input fluid icon="linkify" iconPosition="left" onChange={this.handleURIInputChange} placeholder="Fill download URI here." />
-                <Divider horizontal>Or</Divider>
-                <Input fluid type="file" label="torrent" />
+                {/*<Divider horizontal>Or</Divider>
+                <Input fluid type="file" accept=".torrent" label="torrent" onChange={this.handleUpload.bind(this)} />*/}
               </Form>
             </Modal.Content>
             <Modal.Actions>
