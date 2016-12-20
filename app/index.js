@@ -1,19 +1,57 @@
-// @flow
-import React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import { Router, hashHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
-import routes from './routes';
-import configureStore from './store/configureStore';
-import './app.global.css';
+/* eslint-env node */
+const electron = require('electron')
+const app = electron.app
+const BrowserWindow = electron.BrowserWindow
 
-const store = configureStore();
-const history = syncHistoryWithStore(hashHistory, store);
+const path = require('path')
+const url = require('url')
 
-render(
-  <Provider store={store}>
-    <Router history={history} routes={routes} />
-  </Provider>,
-  document.getElementById('root')
-);
+const startRpcConfig = require('./config')
+
+let mainWindow
+
+function createWindow() {
+
+  mainWindow = new BrowserWindow({
+    width: 360,
+    minHeight: 572,
+    resizable: false
+  })
+
+  mainWindow.loadURL(url.format({
+    pathname: path.join(__dirname, 'index.html'),
+    protocol: 'file:',
+    slashes: true
+  }))
+  if(process.env.NODE_ENV === 'development') {
+    mainWindow.webContents.openDevTools()
+  }
+
+  mainWindow.on('closed', function () {
+    mainWindow = null
+  })
+}
+
+function startServer() {
+  let config = new startRpcConfig()
+  config.init()
+  app.on('before-quit', ()=>{
+    config.p.kill()
+  })
+}
+
+app.on('ready', createWindow)
+
+app.on('ready', startServer)
+
+app.on('window-all-closed', function () {
+  if (process.platform !== 'darwin') {
+    app.quit()
+  }
+})
+
+app.on('activate', function () {
+  if (mainWindow === null) {
+    createWindow()
+  }
+})
