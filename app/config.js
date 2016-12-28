@@ -7,11 +7,15 @@ const gaze = require('gaze')
 const startRpc = require('./aria2server/aria2RpcServer')
 
 const configPath = resolve(homedir(),'.aria2config')
+const sessionPath = 'C:\\Users\\Public\\aria2.session'
 
 function RpcConfig() {
   this.p = undefined
   this.init = () => {
     let defaultConfigName = process.platform === 'darwin' ? 'defaultConfig_mac' : 'defaultConfig_win'
+    if(process.platform === 'win' && !existsSync(sessionPath)) {
+      writeFileSync(sessionPath, '')
+    }
     if(!existsSync(configPath)) {
       let defaultConfig = readFileSync(resolve(__dirname, 'aria2server', defaultConfigName))
       writeFileSync(configPath, defaultConfig)

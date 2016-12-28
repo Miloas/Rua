@@ -1,4 +1,4 @@
-* text eol=lf
+*.exe eol=-crlf
 *.png binary
 *.ico binary
 *.icns binary

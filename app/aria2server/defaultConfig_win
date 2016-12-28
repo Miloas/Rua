@@ -9,8 +9,8 @@ disable-ipv6=false
 allow-overwrite=true
 auto-file-renaming
 
-input-file=/Users/Shared/aria2.session
-save-session=/Users/Shared/aria2.session
+input-file=C:\Users\Public\aria2.session
+save-session=C:\Users\Public\aria2.session
 save-session-interval=10
 
 enable-rpc=true
