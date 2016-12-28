@@ -11,8 +11,9 @@ const configPath = resolve(homedir(),'.aria2config')
 function RpcConfig() {
   this.p = undefined
   this.init = () => {
+    let defaultConfigName = process.platform === 'darwin' ? 'defaultConfig_mac' : 'defaultConfig_win'
     if(!existsSync(configPath)) {
-      let defaultConfig = readFileSync(resolve(__dirname, 'aria2server', 'defaultConfig'))
+      let defaultConfig = readFileSync(resolve(__dirname, 'aria2server', defaultConfigName))
       writeFileSync(configPath, defaultConfig)
     }
     this.p = startRpc(configPath)

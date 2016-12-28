@@ -8,6 +8,7 @@
     "postinstall": "install-app-deps",
     "build": "cross-env NODE_ENV=production webpack",
     "pack": "npm run build && build --dir && babel --no-comments --compact --minified --out-file app/dist/bundle.js app/dist/bundle.js",
+    "packWin": "npm run build && build --win --dir && babel --no-comments --compact --minified --out-file app/dist/bundle.js app/dist/bundle.js",
     "dist": "npm run build && build"
   },
   "main": "app/index.js",
