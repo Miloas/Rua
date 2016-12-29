@@ -5,6 +5,8 @@ max-concurrent-downloads=10
 max-connection-per-server=15
 min-split-size=10M
 split=15
+user-agent=netdisk;Chrome Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36
+
 disable-ipv6=false
 allow-overwrite=true
 auto-file-renaming
