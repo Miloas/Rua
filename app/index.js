@@ -15,7 +15,8 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 360,
     minHeight: 572,
-    resizable: false
+    resizable: false,
+    icon: path.resolve(__dirname, 'static/icon.png')
   })
 
   mainWindow.loadURL(url.format({
